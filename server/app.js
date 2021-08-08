@@ -1,5 +1,12 @@
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
+
+dotenv.config({ path: './config.env'});
+
+const PORT = process.env.PORT;
+require('./db/conn');
 
 const middleware = (req,res,next) => {
     console.log('Hello my middleware');
@@ -26,8 +33,8 @@ app.get('/signup', (req,res) => {
     res.send('signup Route');
 });
 
-app.listen(3000, ()=>{
-    console.log('Server Up and running on port 3000');
+app.listen(PORT, ()=>{
+    console.log(`Server Up and running on port ${PORT}`);
 })
 
 
