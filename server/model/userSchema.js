@@ -1,4 +1,6 @@
 const mongooose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const userSchema = new mongooose.Schema({
     name: {
@@ -24,7 +26,15 @@ const userSchema = new mongooose.Schema({
     cpassword: {
          type: String,
         required:true
-    }
+    },
+    tokens:[
+        {
+            token:{
+                type:String,
+                require:true
+            }
+        }
+    ]
 })
 
 userSchema.pre('save', async function(next){
@@ -34,6 +44,17 @@ userSchema.pre('save', async function(next){
     }
     next();
 })
+
+userSchema.methods.generateAuthToken = async function(){
+    try {
+        let tokenNew = jwt.sign({_id:this._id},process.env.SECRET_KEY);
+        this.tokens = this.tokens.concat({token:tokenNew})
+        await this.save();
+        return tokenNew;
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const User = mongooose.model('USER', userSchema);
 
