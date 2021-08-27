@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import aboutpic from "../images/aboutpic.png";
-import aboutpic1 from "../images/aboutpic1.png";
+// import aboutpic1 from "../images/aboutpic1.png";
 
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const About = () => {
   

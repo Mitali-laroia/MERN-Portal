@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import React, {useState} from "react";
+import {NavLink} from "react-router-dom";
 import signup from "../images/signup1.png";
 import {
   FcBusinessman,
@@ -12,6 +12,25 @@ import {
 
 
 const Signup = () => {
+
+  const [user,setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    work: "",
+    password:"",
+    cpassword:""
+  });
+
+  let name, value;
+
+  const handleInputs = (e) => {
+    console.log(e);
+    name = e.target.name;
+    value = e.target.value;
+
+    setUser({ ...user,[name]:value});
+  }
 
   return (
     <>
@@ -30,8 +49,8 @@ const Signup = () => {
                     name="name"
                     id="name"
                     autoComplete="off"
-                    // value={user.name}
-                    // onChange={handleInputs}
+                    value={user.name}
+                    onChange={handleInputs}
                     placeholder="Your Name"
                   />
                 </div>
@@ -44,8 +63,8 @@ const Signup = () => {
                     name="email"
                     id="email"
                     autoComplete="off"
-                    // value={user.email}
-                    // onChange={handleInputs}
+                    value={user.email}
+                    onChange={handleInputs}
                     placeholder="Your Email"
                   />
                 </div>
@@ -58,22 +77,22 @@ const Signup = () => {
                     name="phone"
                     id="phone"
                     autoComplete="off"
-                    // value={user.phone}
-                    // onChange={handleInputs}
+                    value={user.phone}
+                    onChange={handleInputs}
                     placeholder="Your Mobile Number"
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="work">
-                    {/* <FcBriefcase /> */}
+                    <FcBriefcase />
                   </label>
                   <input
                     type="text"
                     name="work"
                     id="work"
                     autoComplete="off"
-                    // value={user.work}
-                    // onChange={handleInputs}
+                    value={user.work}
+                    onChange={handleInputs}
                     placeholder="Your Profession"
                   />
                 </div>
@@ -87,8 +106,8 @@ const Signup = () => {
                     id="password"
                     placeholder="Your Password"
                     autoComplete="off"
-                    // value={user.password}
-                    // onChange={handleInputs}
+                    value={user.password}
+                    onChange={handleInputs}
                   />
                 </div>
                 <div className="form-group">
@@ -100,8 +119,8 @@ const Signup = () => {
                     name="cpassword"
                     id="cpassword"
                     autoComplete="off"
-                    // value={user.cpassworde}
-                    // onChange={handleInputs}
+                    value={user.cpassworde}
+                    onChange={handleInputs}
                     placeholder="Confirm Your password"
                   />
                 </div>

@@ -1,7 +1,7 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import signinpic from "../images/login2.png";
-import { FcInvite, FcLock } from "react-icons/fc";
-import { NavLink, useHistory } from "react-router-dom";
+import { FcLock } from "react-icons/fc";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
   
