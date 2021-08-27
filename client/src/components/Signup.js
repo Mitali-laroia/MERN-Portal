@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import signup from "../images/signup1.png";
 import {
   FcBusinessman,
@@ -12,7 +12,7 @@ import {
 
 
 const Signup = () => {
-
+  const history = useHistory();
   const [user,setUser] = useState({
     name: "",
     email: "",
@@ -31,6 +31,40 @@ const Signup = () => {
 
     setUser({ ...user,[name]:value});
   }
+
+  //send data to my database
+  const PostData = async(e) => {
+    e.preventDefault();
+
+    const {name,email,phone,work,password,cpassword} = user;
+
+    const res = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,work,
+        password,
+        cpassword,
+      }),
+    });
+
+    const data = await res.json();
+
+    //reply according to server response
+
+    if(data.status == 422 || !data) {
+      window.alert("Invalid Registration");
+      console.log("Invalid Registraion");
+    } else {
+      window.alert("Registration Successfull");
+      console.log("Successfull Registration");
+      history.push("/login");
+    }
+  };
 
   return (
     <>
@@ -131,7 +165,7 @@ const Signup = () => {
                     id="signup"
                     className="form-submit"
                     value="Register"
-                    // onClick={PostData}
+                    onClick={PostData}
                   />
                 </div>
               </form>
