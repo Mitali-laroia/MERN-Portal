@@ -1,10 +1,41 @@
-import React from "react";
+import React,{useState,useContext} from "react";
 import signinpic from "../images/login2.png";
-import { FcLock } from "react-icons/fc";
-import { NavLink } from "react-router-dom";
+import { FcLock,FcInvite } from "react-icons/fc";
+import { NavLink, useHistory } from "react-router-dom";
 
 const Login = () => {
   
+  const history  = useHistory();
+  const [email,setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  //send data to the database
+  const loginUser = async (e)=> {
+    e.preventDefault();
+
+    const res = await fetch("/signin", {
+      method : "POST",
+      headers : {
+        "Content-Type" : "application/json",
+      },
+      body : JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = res.json();
+
+    //check user login or not
+    if(res.status == 400 || !data){
+      window.alert("Invalid Credentials");
+    } else {
+      window.alert("Login Successfull");
+      history.push("/");
+    }
+  };
+
+
   return (
     <>
       <section className="sign-in">
@@ -29,14 +60,15 @@ const Login = () => {
               >
                 <div className="form-group">
                   <label htmlFor="email">
+                  <FcInvite />
                   </label>
                   <input
                     type="email"
                     name="email"
                     id="email"
                     autoComplete="none"
-                    // value={email}
-                    // onChange={(e) => setEmail(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your Email"
                     required={true}
                   />
@@ -49,8 +81,8 @@ const Login = () => {
                     type="password"
                     name="your_pass"
                     id="your_pass"
-                    // value={password}
-                    // onChange={(e) => setPassword(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password"
                     required={true}
                   />
@@ -76,7 +108,7 @@ const Login = () => {
                     id="signin"
                     className="form-submit"
                     value="Log in"
-                    // onClick={loginUser}
+                    onClick={loginUser}
                   />
                 </div>
               </form>
