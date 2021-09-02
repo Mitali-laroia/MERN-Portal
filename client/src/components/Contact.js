@@ -3,6 +3,36 @@ import { NavLink } from "react-router-dom";
 import { FcHome, FcInvite, FcCallback } from "react-icons/fc";
 
 const Contact = () => {
+  const [userData, setUserData] = useState({});
+
+
+  const userContact = async () => {
+    try {
+      const res = await fetch("/about", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setUserData(data);
+
+      if(!res.status === 200){
+        const error = new Error(res.error);
+        throw error;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    userContact();
+  }, []);
+
+  // const data = await res.json();
+
   return (
     <>
       <div className="container mt-5 mb-3">
@@ -64,7 +94,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* <div className="map-content">
+             <div className="map-content"> 
               <form method="POST" id="contact-form">
                 <div className="twice-two">
                   <input
@@ -74,7 +104,7 @@ const Contact = () => {
                     placeholder="Name"
                     name="name"
                     value={userData.name}
-                    onChange={handleInputs}
+                    //  onChange={handleInputs}
                     required={true}
                   />
                   <input
@@ -84,7 +114,7 @@ const Contact = () => {
                     placeholder="Phone"
                     name="phone"
                     value={userData.phone}
-                    onChange={handleInputs}
+                    // onChange={handleInputs}
                     required={true}
                   />
                 </div>
@@ -97,7 +127,7 @@ const Contact = () => {
                     placeholder="Email"
                     name="email"
                     value={userData.email}
-                    onChange={handleInputs}
+                    // onChange={handleInputs}
                     required={true}
                   />
                 </div>
@@ -108,18 +138,18 @@ const Contact = () => {
                   placeholder="Message"
                   name="message"
                   value={userData.message}
-                  onChange={handleInputs}
+                  // onChange={handleInputs}
                   required={true}
                 ></textarea>
                 <button
                   type="submit"
                   className="btn btn-contact"
-                  onClick={contactForm}
+                  // onClick={contactForm}
                 >
                   Send Message
                 </button>
               </form>
-            </div> */}
+            </div> 
           </div>
         </div>
       </div>
