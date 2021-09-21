@@ -3,12 +3,16 @@ import { NavLink } from "react-router-dom";
 import { FcHome, FcInvite, FcCallback } from "react-icons/fc";
 
 const Contact = () => {
-  const [userData, setUserData] = useState({});
-
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   const userContact = async () => {
     try {
-      const res = await fetch("/about", {
+      const res = await fetch("/getdata", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -16,9 +20,15 @@ const Contact = () => {
       });
 
       const data = await res.json();
-      setUserData(data);
+      console.log(data);
+      setUserData({
+        ...userData,
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+      });
 
-      if(!res.status === 200){
+      if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
       }
@@ -31,7 +41,44 @@ const Contact = () => {
     userContact();
   }, []);
 
-  // const data = await res.json();
+  // we are storing data in states
+
+  const handleInputs = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setUserData({ ...userData, [name]: value });
+  };
+
+  //  send the data to backend
+
+  const contactForm = async (e) => {
+    e.preventDefault();
+
+    const { name, email, phone, message } = userData;
+
+    const res = await fetch("/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        phone,
+        message,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!data) {
+      console.log("message not send ");
+    } else {
+      alert("Message Send");
+      setUserData({ ...userData, message: "" });
+    }
+  };
 
   return (
     <>
@@ -94,7 +141,7 @@ const Contact = () => {
               </div>
             </div>
 
-             <div className="map-content"> 
+            <div className="map-content">
               <form method="POST" id="contact-form">
                 <div className="twice-two">
                   <input
@@ -104,7 +151,7 @@ const Contact = () => {
                     placeholder="Name"
                     name="name"
                     value={userData.name}
-                    //  onChange={handleInputs}
+                    onChange={handleInputs}
                     required={true}
                   />
                   <input
@@ -114,7 +161,7 @@ const Contact = () => {
                     placeholder="Phone"
                     name="phone"
                     value={userData.phone}
-                    // onChange={handleInputs}
+                    onChange={handleInputs}
                     required={true}
                   />
                 </div>
@@ -127,7 +174,7 @@ const Contact = () => {
                     placeholder="Email"
                     name="email"
                     value={userData.email}
-                    // onChange={handleInputs}
+                    onChange={handleInputs}
                     required={true}
                   />
                 </div>
@@ -138,24 +185,23 @@ const Contact = () => {
                   placeholder="Message"
                   name="message"
                   value={userData.message}
-                  // onChange={handleInputs}
+                  onChange={handleInputs}
                   required={true}
                 ></textarea>
                 <button
                   type="submit"
                   className="btn btn-contact"
-                  // onClick={contactForm}
+                  onClick={contactForm}
                 >
                   Send Message
                 </button>
               </form>
-            </div> 
+            </div>
           </div>
         </div>
       </div>
     </>
   );
 };
-
 
 export default Contact;
