@@ -56,7 +56,7 @@ const Signup = () => {
 
     //reply according to server response
 
-    if(data.status == 422 || !data) {
+    if(data.status === 422 || !data) {
       window.alert("Invalid Registration");
       console.log("Invalid Registraion");
     } else {

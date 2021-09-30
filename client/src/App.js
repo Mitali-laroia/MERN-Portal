@@ -11,7 +11,7 @@ import Signup from "./components/Signup";
 import ErrorPage from "./components/Errorpage";
 import Logout from "./components/Logout";
 
-// import { initialState, reducer } from "./reducer/UseReducer";
+import { initialState, reducer } from "./reducer/UseReducer";
 
 
 // we create a contextAPI 
@@ -59,11 +59,11 @@ const Routing = () => {
 const App = () => {
 
   //* we use useReducer
-  // const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
    
-      <UserContext.Provider >
+      <UserContext.Provider value={{state, dispatch}}>
         
         <Navbar />
         <Routing />

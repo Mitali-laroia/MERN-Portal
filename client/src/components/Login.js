@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import signinpic from "../images/login2.png";
 import { FcInvite, FcLock } from "react-icons/fc";
 import { NavLink, useHistory } from "react-router-dom";
-// import { UserContext } from "../App";
+import { UserContext } from "../App";
 
 const Login = () => {
-  // const { dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
 
   const history = useHistory();
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ const Login = () => {
     if (res.status === 400 || !data) {
       window.alert("Invalid Credentials");
     } else {
-      // dispatch({ type: "USER", payload: true });
+      dispatch({ type: "USER", payload: true });
       window.alert("Login Successfull");
       history.push("/");
     }
