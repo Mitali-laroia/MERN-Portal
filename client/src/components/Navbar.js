@@ -77,13 +77,14 @@ const Navbar = () => {
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <NavLink className="navbar-brand mb-0 h1" to="/">
-          <img
+          {/* <img
             src={logo}
             style={style}
             className="d-inline-block align-top"
             alt="brandlogo"
-          ></img>
-          <span style={{ fontSize: "xx-large" }}>A</span>
+            height="100px"
+          ></img> */}
+          {/* <span style={{ fontSize: "xx-large" }}>A</span> */}
         </NavLink>
         <button
           className="navbar-toggler"

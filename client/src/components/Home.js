@@ -27,22 +27,22 @@ const Home = () => {
   }, []);
   return (
     <>
-      <header className="page-header header container-fluid">
-        <div className="home-page">
+      <header className="page-header header container-fluid ">
+        <div className="home-page bg-purple">
           <div className="home-cont">
             <p
               className="pt-5"
               style={{
-                color: "darkviolet",
-                fontFamily: "sans-serif",
+                color: "white",
+                fontFamily: "Poppins",
                 fontWeight: "700",
                 letterSpacing: "2.2px",
               }}
             >
               WELCOME
             </p>
-            <h1 style={{ color: "#484be9" }}>{userName}</h1>
-            <h2>
+            <h1 style={{ color: "white" }}>{userName}</h1>
+            <h2 style={{color: "white", fontFamily: "Poppins"}}>
               {show ? "Happy, To See You Back" : "We Are The MERN Developer."}
             </h2>
           </div>
