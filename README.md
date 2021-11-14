@@ -50,5 +50,12 @@ for backend
 
     
 ## Screenshots
+![Screenshot (18)](https://user-images.githubusercontent.com/54024297/141669969-081af76a-eaa2-4e6a-884a-13df50acc5e0.png)
+![Screenshot (20)](https://user-images.githubusercontent.com/54024297/141670023-c6c505ba-cdb2-42df-910a-396bde869fd6.png)
+![Screenshot (19)](https://user-images.githubusercontent.com/54024297/141670033-3abad346-2da9-438d-aad5-2a9b11a43252.png)
+![Screenshot (22)](https://user-images.githubusercontent.com/54024297/141670070-3dc3307c-a67c-4566-b136-05a6e37ef294.png)
+![Screenshot (23)](https://user-images.githubusercontent.com/54024297/141670123-fd44e6db-381b-4d6e-a52d-015945e7b63b.png)
+![Screenshot (25)](https://user-images.githubusercontent.com/54024297/141670155-9d26802e-a9b1-449d-880f-9da4b40d3c81.png)
+
 
 
